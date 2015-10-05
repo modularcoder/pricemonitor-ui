@@ -33,7 +33,7 @@ gulp.task('connect', function() {
 	plugins.connect.server({
 		root: config.buildDir,
 		port: config.port || 3333,
-		livereload: true
+		livereload: false
 	});
 });
 
