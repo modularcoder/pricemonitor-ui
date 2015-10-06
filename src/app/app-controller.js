@@ -36,8 +36,8 @@ pm.main
 
 			res.push({
 				date: date.toDate(),
-				1: 1,
-				2: 1
+				1: Math.random() * 1500,
+				2: Math.random() * 400
 			});
 		}
 
