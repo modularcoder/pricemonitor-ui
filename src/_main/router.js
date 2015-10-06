@@ -21,7 +21,10 @@ pm.main
 			productsData: function(dpd) {
 				return dpd.products.get()
 				.then(function(res) {
-					return res.data
+					return res.data.map(function(item) {
+						item.norm = item.dailynorm;
+						return item;
+					});
 				});
 			}
 		}

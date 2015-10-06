@@ -91,6 +91,7 @@ pm.main
 		dpd.products.get().then(function(res) {
 			vm.products = res.data.map(function(product) {
 				product.isSelected = false;
+				product.norm = product.dailynorm;
 				return product;
 			});
 		});
@@ -166,9 +167,12 @@ pm.main
 				idArr[val.productid] = [];
 			}
 
+			var sum = productidArr[val.productid].norm * (val.price / productidArr[val.productid].ammount);
+			sum = Math.round(sum);
+
 			var arr = [];
 			arr.push(val.date * 1000);
-			arr.push(val.price);
+			arr.push(sum);
 			idArr[val.productid].push(arr);
 		});
 
@@ -183,7 +187,7 @@ pm.main
 
 		finalSeriesArr.push({
             type: 'line',
-            name: 'Regression Line',
+            name: 'Daily Salary',
 			marker: {
 				enabled: false,
 				radius: 2
