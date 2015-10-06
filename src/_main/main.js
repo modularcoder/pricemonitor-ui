@@ -1,6 +1,10 @@
 var pm = {};
 
 pm.main = angular.module("pm", [
+
+	// Vendor modules
+	'angular.morris-chart',
+
 	// Application cached tempaltes
 	// "pm.templates",
 

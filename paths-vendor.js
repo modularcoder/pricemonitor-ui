@@ -58,6 +58,8 @@ var bowerDir 	= config.bowerDir;
 
 	vendorSrciptFiles.push(srcDir + "/_vendor/**/*.js");
 
+	console.log("Vendor Script Files:", vendorSrciptFiles);
+
 	exports.scripts = {
 		src: vendorSrciptFiles,
 		dest: buildDir + "/js"

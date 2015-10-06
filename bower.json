@@ -14,7 +14,9 @@
     "morrisjs": "~0.5.1",
     "nprogress": "~0.2.0",
     "responsive-bootstrap-toolkit": "~2.5.0",
-    "angular": "~1.4.7"
+    "angular": "~1.4.7",
+    "angular-morris-chart": "~1.1.0",
+    "moment": "~2.10.6"
   },
   "overrides": {
     "bootstrap": {
@@ -34,6 +36,12 @@
     },
     "flot.tooltip": {
       "main": "js/jquery.flot.tooltip.js"
+    },
+    "angular-morris-chart": {
+      "main": "src/angular-morris-chart.js"
     }
+  },
+  "resolutions": {
+    "angular": "~1.4.7"
   }
 }
