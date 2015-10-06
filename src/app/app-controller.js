@@ -24,6 +24,9 @@ pm.main
 				enabled: false
 			}
 		},
+		title: {
+			text: ''
+		},
 		options: {
 			legend: {
 				enabled: false
