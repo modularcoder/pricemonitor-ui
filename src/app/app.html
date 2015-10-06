@@ -5,19 +5,24 @@
 
 			<div class="panel-title-block">
 				<h3 class="title">
-					Chart title
+					Price (AMD)
 				</h3>
 			</div>
 
-			<section class="example">
+			<section class="example" >
+				<div ng-if="app.data.length">
+					Data!
 
-				<div
-					area-chart
-					area-data='app.data'
-					area-xkey='{{app.options.x}}'
-					area-ykeys='app.options.y'
-					area-labels='app.options.labels'
-					line-colors='app.options.colors'>
+					<div
+
+						area-chart
+						area-data='app.data'
+						area-xkey='x'
+						area-xlabels="day"
+						area-ykeys='app.options.y'
+						area-labels='app.options.labels'
+						area-colors='app.options.colors'>
+					</div>
 				</div>
 					<!-- area-ykeys='["a", "b"]' -->
 

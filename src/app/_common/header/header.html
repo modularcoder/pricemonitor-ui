@@ -6,4 +6,23 @@
 
 	<!-- {{> app/_common/header/nav/nav}} -->
 
+	<div class="header-block header-block-nav">
+
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="dateFrom">Date From:</label>
+				<input type="date" id="dateFrom" ng-model="app.filter.dateFrom" class="form-control boxed rounded">
+			</div>
+
+			<div class="form-group">
+				<label for="dateTo">Date To:</label>
+				<input type="date"  id="dateTo" ng-model="app.filter.dateTo" class="form-control boxed rounded">
+			</div>
+
+			<button class="btn btn-primary rounded" ng-click="app.queryItems()">
+				Filter
+			</button>
+		</form>
+	</div>
+
 </header>
