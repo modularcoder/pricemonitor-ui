@@ -10,10 +10,11 @@
 			</div>
 
 			<section class="example" >
-				<div ng-if="app.data.length">
-					Data!
+				<div ng-if="app.ready">
+					<highchart id="chart1" config="app.chartConfig"></highchart>
 
-					<div
+
+					<!-- <div
 
 						area-chart
 						area-data='app.data'
@@ -22,7 +23,7 @@
 						area-ykeys='app.options.y'
 						area-labels='app.options.labels'
 						area-colors='app.options.colors'>
-					</div>
+					</div> -->
 				</div>
 					<!-- area-ykeys='["a", "b"]' -->
 

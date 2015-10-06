@@ -1,15 +1,72 @@
 pm.main
-.controller("AppCtrl", function($log, $rootScope, $timeout, $scope, dpd) {
+.controller("AppCtrl", function($log, $rootScope, $timeout, $scope, dpd, highchartsNG) {
 	var vm = this;
+
+	vm.ready = false;
+
+	highchartsNG.ready(function() {	
+		vm.ready = true;
+	}, this);
+
+
+	/*********************************************
+	*				Chart Configs
+	*********************************************/
+
+	vm.chartConfig = {
+		chart: {
+			type: 'area'
+		},
+		xAxis: {
+			type: "datetime",
+			tickmarkPlacement: 'on',
+			title: {
+				enabled: false
+			}
+		},
+		options: {
+			legend: {
+				enabled: false
+			},
+			plotOptions: {
+				area: {
+					stacking: 'normal',
+					lineColor: '#666666',
+					lineWidth: 1,
+					treshold: null,
+					states: {
+						hover: {
+							lineWidth: 1,
+							radius: 2,
+							symbol: 'circle',
+						}
+					},
+					marker: {
+						enabled: false,
+						radius: 2
+					}
+				}
+			},
+		},
+		series: [],
+		useHighStocks: false
+	};
+
+	/*********************************************
+	*				Filter
+	*********************************************/
 
 	vm.filter = {
 		dateFrom: moment().subtract('days', 30).toDate(),
 		dateTo: moment().toDate()
 	};
 
-	vm.data = [];
 	vm.products = [];
 	vm.entries = [];
+
+	/*********************************************
+	*				Products
+	*********************************************/
 
 	dpd.products.get().then(function(res) {
 		vm.products = res.data.map(function(product) {
@@ -18,11 +75,33 @@ pm.main
 		});
 	});
 
-	dpd.entries.get().then(function(res) {
-		vm.entries = res.data;
 
-		$log.log("Entries:", vm.entries);
-	});
+
+	/*********************************************
+	*				Entries
+	*********************************************/
+
+	vm.queryItems = function() {
+		dpd.entries.get({
+			$sort: {
+				date: 1
+			},
+			date: {
+				$gte: moment(vm.filter.dateFrom).unix(),
+				$lte: moment(vm.filter.dateTo).unix()
+			}
+		}).then(function(res) {
+			vm.entries = res.data;
+		});
+	};
+
+	vm.setData = setData;
+
+	vm.queryItems();
+
+	/*********************************************
+	*				Watchers
+	*********************************************/
 
 	// On products change, set data
 	$scope.$watch(function() {
@@ -31,69 +110,11 @@ pm.main
 		setData();
 	});
 
-
 	$scope.$watch(function() {
 		return vm.entries;
 	}, function() {
 		setData();
 	});
-
-
-	vm.queryItems = function() {
-
-	};
-
-
-	// $timeout(function() {
-	// 	vm.options = {
-	// 		colors: [
-	// 			"#77BFD7", 
-	// 			"#A8D6E6"
-	// 		],
-	// 		labels: ["a", "b"],
-	// 		x: "x",
-	// 		y: ["a", "b"]
-	// 	};
-
-	// 	vm.data = [
-	// 		{
-	// 			x: "2006",
-	// 			a: 1,
-	// 			b: 1
-	// 		},
-	// 		{
-	// 			x: "2007",
-	// 			a: 1,
-	// 			b: 1
-	// 		}
-	// 	];
-	// }, 1000);
-
-
-	// $timeout(function() {
-	// 	vm.options = {
-	// 		colors: [
-	// 			"#77BFD7", 
-	// 			"#A8D6E6"
-	// 		],
-	// 		labels: ["a", "b"],
-	// 		x: "x",
-	// 		y: ["a", "b"]
-	// 	};
-
-	// 	vm.data = [
-	// 		{
-	// 			x: "2006",
-	// 			a: 11,
-	// 			b: 1
-	// 		},
-	// 		{
-	// 			x: "2007",
-	// 			a: 11,
-	// 			b: 1
-	// 		}
-	// 	];
-	// }, 5000);
 
 
 	function setData() {
@@ -102,60 +123,44 @@ pm.main
 			return false;
 		}
 
-		var dateArr = {};
-		
+		var finalSeriesArr = [];
+		var finalDateArr = [];
+		var idArr = {};
 
-		vm.entries.forEach(function(val) {
-			if (typeof dateArr[val.date] == 'undefined') {
-				dateArr[val.date] = [];
-			}
-			var obj = {
-				productid: val.productid,
-				price: val.price
-			};
-			dateArr[val.date].push(obj);
+		vm.productsSelected = _.filter(vm.products, function(item) {
+			return item.isSelected;
 		});
 
-		var finalArr = [];
-		for (var key in dateArr) {
-			var obj = {
-				x: parseInt(key)
-			};
+		var productidArr = _.indexBy(vm.productsSelected, 'id');
 
-			dateArr[key].forEach(function(val) {
-				obj[val.productid] = val.price;
-			});
+		vm.entries.forEach(function(val) {
+			if (typeof productidArr[val.productid] === 'undefined') return;
 
-			finalArr.push(obj);
-		}
-
-		// Y Keys based on data
-
-		var yKeys = [];
-
-		for (var key in finalArr[0]) {
-			if (key !== "x") {
-				yKeys.push(key);
+			if (typeof idArr[val.productid] == 'undefined') {
+				idArr[val.productid] = [];
 			}
+
+			var arr = [];
+			arr.push(val.date * 1000);
+			arr.push(val.price);
+			idArr[val.productid].push(arr);
+		});
+
+		for (var productid in idArr) {
+			finalSeriesArr.push({
+				name: productidArr[productid].name,
+				type: "area",
+				data: idArr[productid]
+			});
 		}
 
 
-		vm.options = {
-			// colors: [
-			// 	"#77BFD7", 
-			// 	"#A8D6E6"
-			// ],
-			labels: yKeys,
-			x: "x",
-			y: yKeys
-		};
-
-		vm.data = finalArr;
+		vm.chartConfig.series = finalSeriesArr;
 
 
-		$log.log("Options:", vm.options);
-		$log.log("Data", vm.data);
-	}
+		// console.log(finalDateArr);
+		// console.log(finalSeriesArr);
+	};
 	
 });
 

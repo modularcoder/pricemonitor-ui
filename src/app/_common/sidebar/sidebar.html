@@ -5,7 +5,7 @@
 	<nav class="menu">
 		<ul class="nav">
 			<li ng-repeat="item in app.products" ng-class="{active: item.isSelected}" >
-				<a href="" ng-click="item.isSelected = !item.isSelected">
+				<a href="" ng-click="item.isSelected = !item.isSelected; app.setData();">
 					<i class="fa fa-check"></i>
 					{{item.name}}
 				</a>
