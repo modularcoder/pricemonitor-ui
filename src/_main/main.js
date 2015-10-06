@@ -4,6 +4,7 @@ pm.main = angular.module("pm", [
 
 	// Vendor modules
 	'angular.morris-chart',
+	'dpd',
 
 	// Application cached tempaltes
 	// "pm.templates",

@@ -1,10 +1,16 @@
 pm.main
-.controller("AppCtrl", function($log, $rootScope) {
+.controller("AppCtrl", function($log, $rootScope, dpd) {
 	var vm = this;
 
-	setData();
+	vm.products = [];
 
-	$log.log("vm.data:", vm.data);
+	dpd.products.get()
+	.then(function(res) {
+		vm.products = res.data;
+		$log.log(vm.products);
+	});
+
+	setData();
 
 	function setData() {
 		vm.options = {

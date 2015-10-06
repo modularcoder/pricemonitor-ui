@@ -3,11 +3,11 @@
 		PriceMonitor
 	</div>
 	<div class="picker">
-		Valod 
-		Vulud 
-		Hac 
-		Macun
-		Pomidor
+		<ul>
+			<li ng-repeat="item in app.products">
+				{{item.name}}
+			</li>
+		</ul>
 	</div>
 </aside>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
