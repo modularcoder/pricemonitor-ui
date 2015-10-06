@@ -1,0 +1,16 @@
+<div class="app setup">
+	<div class="auth-container">
+		<div class="panel">
+			<header class="auth-header">
+				<h1 class="auth-title">Consumer Busket Monitor</h1>
+			</header>
+			<div class="auth-content">
+				<ng-include 
+					src="'/templates/setup/'+  
+							setup.steps[setup.activeStep] + '/' + 
+							setup.steps[setup.activeStep] + '.html'"></ng-include>
+
+			</div>
+		</div>
+	</div>
+</div>

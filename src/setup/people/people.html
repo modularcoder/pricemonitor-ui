@@ -1,0 +1,19 @@
+<div class="form-group">
+	<label for="budget" >Family budget (AMD)</label>
+	<input type="number" min="0"
+		ng-model="setup.budget"
+		class="form-control"
+		id="budget" required="">
+</div>
+<div class="form-group">
+	<label for="members" >Number of family members</label>
+	<input type="number" min="1"
+		ng-model="setup.members"
+		class="form-control"
+		id="members" required="">
+</div>
+<div class="form-group">
+	<button type="submit" class="btn btn-block btn-primary" ng-click="setup.next()">
+		Continue
+	</button>
+</div>

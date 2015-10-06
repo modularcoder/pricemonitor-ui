@@ -16,18 +16,9 @@
 		<link rel="stylesheet" href="css/app.css">
 	</head>
 	<body>
-		<div class="main-wrapper">
-			<div class="app" id="app" ng-controller="AppCtrl as app">
+		
+		<div ui-view></div>
 
-				<ng-include src="'/templates/app/_common/header/header.html'"></ng-include>
-
-				<ng-include src="'/templates/app/_common/sidebar/sidebar.html'"></ng-include>
-
-				<article class="content main-page">
-					<ng-include src="'/templates/app/app.html'"></ng-include>
-				</article>
-			</div>
-		</div>	
 		<!-- Primary color ref div -->
 		<div class="ref" id="ref"></div>
 		<script src="http://code.highcharts.com/adapters/standalone-framework.js"></script>

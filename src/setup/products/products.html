@@ -1,0 +1,41 @@
+<p class="description">
+	Select family member average daily consumption
+</p>
+<div class="form-group" ng-repeat="product in setup.products">
+
+	<div class="row">
+		<div class="col-xs-12 input-group">
+			<span 
+				class="input-group-addon product" 
+				style="cursor:pointer;"
+				ng-class="{
+					active: product.active
+				}"
+				ng-click="product.active = !product.active"
+			>
+				<i class="fa fa-check"></i>
+				{{product.name}}
+			</span>
+			<input 
+				ng-disabled="!product.active"
+				ng-model="product.ammount"
+				class="form-control boxed rounded"
+				id="budget" required="">
+			<span class="input-group-addon" id="basic-addon1">{{product.unit}}</span>
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	<div class="row">
+		<div class="col-xs-6">
+			<button type="submit" class="btn btn-block btn-default" ng-click="setup.prev()">
+				Back
+			</button>
+		</div>
+		<div class="col-xs-6">
+			<button type="submit" class="btn btn-block btn-primary" ng-click="setup.finish()">
+				Finish
+			</button>
+		</div>
+	</div>
+</div>

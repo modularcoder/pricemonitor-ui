@@ -1,5 +1,8 @@
 pm.main
-.controller("AppCtrl", function($log, $rootScope, $timeout, $scope, dpd, highchartsNG) {
+.controller("AppCtrl", function(
+	$log, $rootScope, $timeout, $scope,
+	App, dpd, highchartsNG
+) {
 	var vm = this;
 
 	vm.ready = false;
@@ -23,6 +26,9 @@ pm.main
 			title: {
 				enabled: false
 			}
+		},
+		yAxis: {
+			type: 'logarithmic',
 		},
 		title: {
 			text: ''
@@ -71,12 +77,24 @@ pm.main
 	*				Products
 	*********************************************/
 
-	dpd.products.get().then(function(res) {
-		vm.products = res.data.map(function(product) {
+
+
+	if (App.products.length) {
+		$log.log("App factory:", angular.copy(App));
+
+		vm.products = App.products.map(function(product) {
 			product.isSelected = false;
 			return product;
 		});
-	});
+	}
+	else {
+		dpd.products.get().then(function(res) {
+			vm.products = res.data.map(function(product) {
+				product.isSelected = false;
+				return product;
+			});
+		});
+	}
 
 
 
@@ -130,6 +148,11 @@ pm.main
 		var finalDateArr = [];
 		var idArr = {};
 
+		vm.products.forEach(function(val, key) {
+			val.color = key;
+			vm.products[key] = val;
+		});
+
 		vm.productsSelected = _.filter(vm.products, function(item) {
 			return item.isSelected;
 		});
@@ -153,10 +176,21 @@ pm.main
 			finalSeriesArr.push({
 				name: productidArr[productid].name,
 				type: "area",
-				data: idArr[productid]
+				data: idArr[productid],
+				color: Highcharts.getOptions().colors[productidArr[productid].color]
 			});
 		}
 
+		finalSeriesArr.push({
+            type: 'line',
+            name: 'Regression Line',
+			marker: {
+				enabled: false,
+				radius: 2
+			},
+			color: '#000000',
+			data: [[moment(vm.filter.dateFrom).unix() * 1000, App.dailyBudget], [moment(vm.filter.dateTo).unix() * 1000, App.dailyBudget]]
+        });
 
 		vm.chartConfig.series = finalSeriesArr;
 

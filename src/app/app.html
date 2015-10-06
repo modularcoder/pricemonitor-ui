@@ -1,35 +1,42 @@
-<div >
+<div class="main-wrapper">
+	<div class="app" id="app">
 
-	<div class="panel">
-		<div class="panel-body">
+		<ng-include src="'/templates/app/_common/header/header.html'"></ng-include>
 
-			<div class="panel-title-block">
-				<h3 class="title">
-					Price (AMD)
-				</h3>
-			</div>
+		<ng-include src="'/templates/app/_common/sidebar/sidebar.html'"></ng-include>
 
-			<section class="example" >
-				<div ng-if="app.ready">
-					<highchart id="chart1" config="app.chartConfig"></highchart>
+		<article class="content main-page">
+			<div class="panel">
+				<div class="panel-body">
+
+					<div class="panel-title-block">
+						<h3 class="title">
+							Price (AMD)
+						</h3>
+					</div>
+
+					<section class="example" >
+						<div ng-if="app.ready">
+							<highchart id="chart1" config="app.chartConfig"></highchart>
 
 
-					<!-- <div
+							<!-- <div
 
-						area-chart
-						area-data='app.data'
-						area-xkey='x'
-						area-xlabels="day"
-						area-ykeys='app.options.y'
-						area-labels='app.options.labels'
-						area-colors='app.options.colors'>
-					</div> -->
+								area-chart
+								area-data='app.data'
+								area-xkey='x'
+								area-xlabels="day"
+								area-ykeys='app.options.y'
+								area-labels='app.options.labels'
+								area-colors='app.options.colors'>
+							</div> -->
+						</div>
+							<!-- area-ykeys='["a", "b"]' -->
+
+					</section>
+
 				</div>
-					<!-- area-ykeys='["a", "b"]' -->
-
-			</section>
-
-		</div>
+			</div>
+		</article>
 	</div>
-
 </div>

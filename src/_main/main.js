@@ -3,6 +3,7 @@ var pm = {};
 pm.main = angular.module("pm", [
 
 	// Vendor modules
+	'ui.router',
 	'angular.morris-chart',
 	'highcharts-ng',
 	'dpd',
