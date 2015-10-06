@@ -168,7 +168,7 @@ pm.main
 			}
 
 			var sum = productidArr[val.productid].norm * (val.price / productidArr[val.productid].ammount);
-			sum = Math.round(sum);
+			sum = App.members * Math.round(sum);
 
 			var arr = [];
 			arr.push(val.date * 1000);
