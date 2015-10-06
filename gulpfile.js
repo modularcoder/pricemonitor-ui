@@ -42,12 +42,7 @@ gulp.task('connect', function() {
 gulp.task('watch', function() {
 	// When template changes recompile .html pages
 	plugins.watch(paths.app.templates.src, function() {
-	    gulp.start('app-pages');
-	});
-
-	// When context file changes recompile .html pages
-	plugins.watch(config.srcDir + "/**/.context.js", function() {
-	    gulp.start('app-pages');
+	    gulp.start('app-templates');
 	});
 
 	// When script changes recompile scripts

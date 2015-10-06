@@ -2,12 +2,15 @@
 	<div class="brand">
 		PriceMonitor
 	</div>
-	<div class="picker">
-		<ul>
-			<li ng-repeat="item in app.products">
-				{{item.name}}
+	<nav class="menu">
+		<ul class="nav">
+			<li ng-repeat="item in app.products" ng-class="{active: item.isSelected}" >
+				<a href="" ng-click="item.isSelected = !item.isSelected">
+					<i class="fa fa-check"></i>
+					{{item.name}}
+				</a>
 			</li>
 		</ul>
-	</div>
+	</nav>
 </aside>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>

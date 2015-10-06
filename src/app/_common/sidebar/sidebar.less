@@ -24,6 +24,16 @@
 		}
 	}
 
+	.menu {
+		position: absolute;
+		top: 70px;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
 
 	.nav {
 
@@ -38,7 +48,6 @@
 		// Second + menu items
 		ul {
 			padding: 0;
-			height: 0px;
 			overflow: hidden;
 
 			.loaded & {
@@ -54,6 +63,9 @@
 		// All links which are not active
 		// have subdued color
 		li a {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			color: fade(@color-text-inverse, 50%);
 		}
 
@@ -73,68 +85,34 @@
 
 			// First level items links
 			& > a {
-				padding-top: 15px;
-				padding-bottom: 15px;
-				padding-left: 20px;
+				display: block;
+				padding-top: 3px;
+				padding-bottom: 3px;
+				padding-left: 10px;
+				padding-right: 0;
+
+				i {
+					opacity: 0.3;
+				}
+			}
+
+
+			&.active > a {
+				color: @color-text-inverse;
 			}
 
 			// First level active links have primary background
 			&.active > a,
 			&.active > a:hover {
-				background-color: @color-primary !important;
-				color: @color-text-inverse !important;
-			}
+				// background-color: @color-primary !important;
+				// color: @color-text-inverse !important;
 
-			// First level active links have bit darker background
-			&.open > a {
-				background-color: darken(@color-primary-dark, 3%);
-			}
-
-			// Open items links
-			&.open > a {
-				i.arrow {
-					transform: rotate(90deg);
-				}
-			}
-
-			// First level item links arrow 
-			& > a {
 				i {
-					margin-right: 5px;
-
-					&.arrow {
-						float: right;
-						font-size: 20px;
-						line-height: initial;
-						transition: all 0.3s ease;
-
-						&:before {
-							content: "\f105" !important;
-						}
-					}
+					opacity: 1;
 				}
 			}
 
-		}
 
-		// Second level items
-		& > li > ul > li {
-
-			// Second level and deeper items links
-			// Have bit darker background and more padding 
-			// from left side
-			a {
-				padding-top: 10px;
-				padding-bottom: 10px;
-				padding-left: 50px;
-				background-color: darken(@color-primary-dark, 3%);
-			}
-
-			// Second level active items links
-			// Have brighter color
-			&.active a {
-				color: @color-text-inverse;
-			}
 		}
 	}
 

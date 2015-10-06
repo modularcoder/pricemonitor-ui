@@ -6,11 +6,14 @@ pm.main
 
 	dpd.products.get()
 	.then(function(res) {
-		vm.products = res.data;
-		$log.log(vm.products);
+		vm.products = res.data.map(function(product) {
+			product.isSelected = false;
+			return product;
+		});
 	});
 
 	setData();
+
 
 	function setData() {
 		vm.options = {
