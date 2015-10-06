@@ -15,15 +15,16 @@ pm.main
 	function setData() {
 		vm.options = {
 			colors: [
-				"#31C0BE", 
-				"#c7254e"
+				"#77BFD7", 
+				"#A8D6E6"
 			],
 			labels: [
 				"Series A", 
 				"Series B"
 			],
-			x: "date",
-			y: ["1", "2"]
+			x: "x",
+			// y: ["1", "2"]
+			y: ["a", "b"]
 		};
 
 		vm.data = generateRandomData();
@@ -37,14 +38,19 @@ pm.main
 		var today = moment();
 		var monthAgo = moment().subtract(30, 'days');
 
+		var i = 1;
+
 		for (var date = monthAgo; date.isBefore(today); date.add(1, 'day')) {
 
 
 			res.push({
-				date: date.toDate(),
-				1: Math.random() * 1500,
-				2: Math.random() * 400
+				// date: date.toDate().toString(),
+				x: i,
+				a: Math.random() * 1500,
+				b: Math.random() * 400
 			});
+
+			i++;
 		}
 
 		return res;
