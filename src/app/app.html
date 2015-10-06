@@ -1,5 +1,29 @@
 <div ng-controller="AppCtrl as app">
 
+	<div class="panel">
+		<div class="panel-body">
 
+			<div class="panel-title-block">
+				<h3 class="title">
+					Chart title
+				</h3>
+			</div>
+
+			<section class="example">
+
+				<div
+					area-chart
+					area-data='app.data'
+					area-xkey='{{app.options.x}}'
+					area-ykeys='app.options.y'
+					area-labels='app.options.labels'
+					line-colors='app.options.colors'>
+				</div>
+					<!-- area-ykeys='["a", "b"]' -->
+
+			</section>
+
+		</div>
+	</div>
 
 </div>
