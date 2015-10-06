@@ -36,7 +36,7 @@ pm.main
 					stacking: 'normal',
 					lineColor: '#666666',
 					lineWidth: 1,
-					treshold: null,
+					// treshold: null,
 					states: {
 						hover: {
 							lineWidth: 1,
