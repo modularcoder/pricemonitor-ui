@@ -56,6 +56,17 @@ pm.main
 					}
 				}
 			},
+			chart: {
+				spacingTop: 40
+			},
+			exporting: {
+				buttons: {
+					contextButton: {
+						// verticalAlign: "bottom",
+						y: -25
+					}
+				}
+			}
 		},
 		series: [],
 		useHighStocks: false
